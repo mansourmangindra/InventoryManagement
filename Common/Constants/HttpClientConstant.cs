@@ -2,12 +2,12 @@
 {
     public static class HttpClientConstant
     {
-        public const string DotNet8ApiNamedClient = "InventoryManagementApiClient";
+        public const string InventoryApiNamedClient = "InventoryManagementApiClient";
 
     }
 
     public enum ApiResource
     {
-        DotNet8ApiNamedClient
+        InventoryApiNamedClient
     }
 }

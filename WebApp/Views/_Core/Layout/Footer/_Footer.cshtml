@@ -1,0 +1,12 @@
+﻿
+@{
+    var displayYear = 2024 != DateTime.UtcNow.Year ? "2024-" + DateTime.UtcNow.Year.ToString() : DateTime.UtcNow.Year.ToString();
+}
+
+<footer class="content-footer footer bg-footer-theme">
+    <div class="d-flex flex-wrap justify-content-between py-3 flex-md-row flex-column container-fluid">
+        <div class="text-body mb-2 mb-md-0">
+            powered by <strong>Personal Project by Mansour</strong> &copy;@displayYear
+        </div>
+    </div>
+</footer>

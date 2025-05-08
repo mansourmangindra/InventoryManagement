@@ -1,4 +1,5 @@
-﻿using Common.Constants;
+﻿using Azure;
+using Common.Constants;
 using Common.DataTransferObjects._Core.ErrorLog;
 using Common.DataTransferObjects.User;
 using DataAccess.DbContexts.InventoryManagement.Models;
@@ -16,11 +17,11 @@ namespace WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IInventoryUnitOfWork _inventoryUnityOfWork;
-        private readonly IRegistration _registration;
-        public UserController(IInventoryUnitOfWork inventoryUnitOfWork, IRegistration registration)
+        private readonly IAuthService _authService;
+        public UserController(IInventoryUnitOfWork inventoryUnitOfWork, IAuthService authService)
         {
             _inventoryUnityOfWork = inventoryUnitOfWork;
-            _registration = registration;
+            _authService = authService;
         }
 
         [HttpPost]
@@ -37,9 +38,25 @@ namespace WebApi.Controllers
             }
 
 
-            string userId = await _registration.Register(transactionBy, saveUserDto);
+            string userId = await _authService.Register(transactionBy, saveUserDto);
             return Ok(userId);
 
+
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
+        {
+            var loginResponse = await _authService.Login(model);
+
+            if (loginResponse.User == null)
+            {
+                return BadRequest(new ErrorMessage("Username or password is incorrect"));
+            }
+
+            //_response.Result = loginResponse;
+            return Ok(model);
 
         }
     }

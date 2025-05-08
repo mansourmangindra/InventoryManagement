@@ -1,4 +1,6 @@
 using ApiConfiguration;
+using ApiConfiguration.Service;
+using Common.Constants;
 using Common.DataTransferObjects._Core.AppSettings;
 using Common.DataTransferObjects._Core.ErrorLog;
 using DataAccess.DbContexts.InventoryManagement;
@@ -15,15 +17,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-IdentityServerApiDefinition identityServerApiDefinition = new();
-builder.Configuration.Bind(nameof(IdentityServerApiDefinition), identityServerApiDefinition);
-builder.Services.AddSingleton(identityServerApiDefinition);
+//IdentityServerApiDefinition identityServerApiDefinition = new();
+//builder.Configuration.Bind(nameof(IdentityServerApiDefinition), identityServerApiDefinition);
+//builder.Services.AddSingleton(identityServerApiDefinition);
 
 //DBContext Registration
 builder.Services.AddDbContext<InventoryManagementDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("INVENTORYDB"));
 });
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+
 
 //UnitOfWork Registration
 builder.Services.AddScoped<IInventoryUnitOfWork, InventoryUnitOfWork>();
@@ -33,8 +39,7 @@ builder.Services.AddHttpContextAccessor();
 //Services Registration
 
 builder.Services.AddScoped<IErrorLogService, ErrorLogService>();
-builder.Services.AddScoped<IRegistration, Registration>();
-
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -43,7 +48,7 @@ builder.Services.AddSwaggerGen();
 
 
 
-ApiServices.ConfigureServices(builder.Services, identityServerApiDefinition);
+//ApiServices.ConfigureServices(builder.Services, identityServerApiDefinition);
 
 
 
@@ -74,4 +79,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

@@ -1,0 +1,42 @@
+﻿@inject IHttpContextAccessor httpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en"
+      class="light-style layout-compact"
+      dir="ltr" data-theme="theme-semi-dark" data-assets-path='@((httpContextAccessor.HttpContext?.Request.PathBase ?? "") + "/")'
+      data-template="horizontal-menu-template">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    @{
+        string title = ViewData["title"] as string ?? "";
+    }
+
+    <title>@title | WfmHub</title>
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/img/favicon/favicon.ico" />
+
+    <!-- Core Styles -->
+    @await Html.PartialAsync("~/Views/_Core/Layout/_MainAsset/_CoreHead.cshtml")
+
+    <!-- Page Styles -->
+    @await RenderSectionAsync("PageStyles", required: false)
+</head>
+
+<body>
+    <!-- Layout Content -->
+    @RenderBody()
+    <!--/ Layout Content -->
+
+    <!-- Core Scripts -->
+    @await Html.PartialAsync("~/Views/_Core/Layout/_MainAsset/_CoreScript.cshtml")
+
+    <!-- Page Scripts-->
+    @await RenderSectionAsync("PageScripts", required: false)
+</body>
+
+</html>

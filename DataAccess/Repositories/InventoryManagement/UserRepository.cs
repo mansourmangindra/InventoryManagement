@@ -2,9 +2,9 @@
 using DataAccess.DbContexts.InventoryManagement;
 using DataAccess.DbContexts.InventoryManagement.Models;
 using DataAccess.Repositories.Base;
-using DataAccess.Repositories.DotNet8.Interfaces;
+using DataAccess.Repositories.InventoryManagement.Interfaces;
 
-namespace DataAccess.Repositories.DotNet8
+namespace DataAccess.Repositories.InventoryManagement
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {

@@ -1,7 +1,5 @@
 ﻿using Common.DataTransferObjects._Core.AuditTrail;
 using DataAccess.DbContexts.InventoryManagement;
-using DataAccess.Repositories.DotNet8;
-using DataAccess.Repositories.DotNet8.Interfaces;
 using DataAccess.Repositories.InventoryManagement;
 using DataAccess.Repositories.InventoryManagement.Interfaces;
 using DataAccess.Services.Interfaces;
@@ -19,10 +17,14 @@ namespace DataAccess.UnitOfWorks.InventoryManagement
             _dbContextChangeTrackingService = dbContextChangeTrackingService;
             ErrorLogRepository = new ErrorLogRepository(_context);
             UserRepository = new UserRepository(_context);
+            UserRoleRepository = new UserRoleRepository(_context);
+            RoleRepository = new RoleRepository(_context);
         }
 
         public IErrorLogRepository ErrorLogRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }
+        public IUserRoleRepository UserRoleRepository { get; private set; }
+        public IRoleRepository RoleRepository { get; private set; }
 
         public void Dispose()
         {

@@ -1,0 +1,10 @@
+﻿@model WebApp.Models.SelectList.SelectListViewModel
+
+@if (Model.ReadOnly)
+{
+    @Html.DropDownList(Model.ControlId, Model.ListItems, "", new { @class = "select2 form-select form-select-sm selectDisabled", @disabled = "disabled" })
+}
+else
+{
+    @Html.DropDownList(Model.ControlId, Model.ListItems, "", new { @class = "select2 form-select form-select-sm" })
+}

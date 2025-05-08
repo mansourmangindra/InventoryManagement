@@ -1,4 +1,6 @@
-﻿namespace Common.DataTransferObjects.User
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Common.DataTransferObjects.User
 {
     public class UserDetail
     {

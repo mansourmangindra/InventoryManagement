@@ -1,0 +1,19 @@
+﻿<nav id="layout-navbar" class="layout-navbar   navbar navbar-expand-xl align-items-center bg-navbar-theme">
+    <div class="container-fluid">
+        <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4 mt-4 mb-4">
+            <a href="/" class="app-brand-link gap-2">
+                <span class="app-brand-logo demo d-none d-lg-block">
+                    <img width="30" height="30" src="~/img/branding/AppLogoMidnightBlue.png" alt="logo">
+                </span>
+                <span class="app-brand-logo demo d-lg-none">
+                    <img width="30" height="30" src="~/img/branding/AppLogoWhiteNoBg.png" alt="logo">
+                </span>
+                <span class="app-brand-text demo menu-text fw-semibold ms-1">DotNet8</span>
+            </a>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
+                <span class="mdi mdi-close align-middle"></span>
+            </a>
+        </div>
+        @await Html.PartialAsync("~/Views/_Core/Navbar/_Navbar.cshtml")
+    </div>
+</nav>

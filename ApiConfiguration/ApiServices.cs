@@ -12,20 +12,9 @@ namespace ApiConfiguration
 {
     public static class ApiServices
     {
-        public static void ConfigureServices(IServiceCollection services, IdentityServerApiDefinition identityServerApiDefinition)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            //Identity Server Authorization
-            services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", config =>
-                {
-                    config.Authority = identityServerApiDefinition.Authority;
-                    config.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidAudience = identityServerApiDefinition.ApiName,
-                    };
-                });
 
             //Api Versioning
             services.AddApiVersioning(opt =>

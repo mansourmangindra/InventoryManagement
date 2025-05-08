@@ -1,0 +1,12 @@
+﻿@model WebApp.Models.SelectList.LiveSearchViewModel
+
+@{
+    string isDisabled = Model.ReadOnly ? "disabled" : String.Empty;
+}
+
+<select class="form-select form-select-sm" data-size="10" id="@Model?.ControlId" name="@Model?.ControlId" @isDisabled>
+    @if (Model?.SelectedItem?.Value != null)
+    {
+        <option value="@Model.SelectedItem.Value" selected="selected">@Model.SelectedItem.Name</option>
+    }
+</select>

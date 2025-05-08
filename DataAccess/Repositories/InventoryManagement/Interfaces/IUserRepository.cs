@@ -1,7 +1,7 @@
 ﻿using DataAccess.DbContexts.InventoryManagement.Models;
 using DataAccess.Repositories.Base;
 
-namespace DataAccess.Repositories.DotNet8.Interfaces
+namespace DataAccess.Repositories.InventoryManagement.Interfaces
 {
     public interface IUserRepository : IBaseRepository<User>
     {

@@ -1,0 +1,134 @@
+﻿@using Common.Constants
+@using WebApp.Models.SelectList
+@{
+    ViewData["Title"] = "Sample";
+}
+
+<div class="row">
+    <!-- DotNet8 API -->
+    <div class="col-md col-md-4 mb-3">
+        <div class="card">
+            <h5 class="card-header">DotNet8 API</h5>
+            <div class="card-body">
+                <div>
+                    <label for="ddl-user" class="form-label">User</label>
+                    @{
+                        @await Component.InvokeAsync("SelectList", new SelectListParam() { ControlId = "ddl-user", ApiEndpoint = ReferenceDataConstant.UsersApiRoute, EnableCache = false })
+                    }
+                    <div id="ddl-user" class="form-text"> Sample single select from API.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Mapping -->
+@*     <div class="col-md col-md-4 mb-3">
+        <div class="card">
+            <h5 class="card-header">GlobalMapping API</h5>
+            <div class="card-body">
+                <div>
+                    <label for="ddl-client" class="form-label">Client</label>
+                    @{
+                        @await Component.InvokeAsync("SelectList", new SelectListParam() { ControlId = "ddl-client", ApiEndpoint = ReferenceDataConstant.GlobalMapping_ClientApiRoute, ApiResource = ApiResource.GlobalMappingApiNamedClient })
+                    }
+                    <div id="ddl-client" class="form-text">(Single) This data is comming from dev instance of global mapping API.</div>
+                </div>
+                <hr />
+                <div>
+                    <label for="ddl-client2" class="form-label">Clients</label>
+                    @{
+                        @await Component.InvokeAsync("MultiSelectList", new MultiSelectListParam() { ControlId = "ddl-client2", ApiEndpoint = ReferenceDataConstant.GlobalMapping_ClientApiRoute, ApiResource = ApiResource.GlobalMappingApiNamedClient })
+                    }
+                    <div id="ddl-client2" class="form-text">(Multiple) This data is comming from dev instance of global mapping API.</div>
+                </div>
+            </div>
+        </div>
+    </div> *@
+
+    <!-- MS Graph API -->
+    <div class="col-md col-md-4 mb-3">
+        <div class="card">
+            <h5 class="card-header">MS Graph API</h5>
+            <div class="card-body">
+                <div>
+                    <label for="ddl-livesearch" class="form-label">User</label>
+                    @{
+                        await Html.RenderPartialAsync("~/Views/_Core/SelectList/_LiveSearch.cshtml", new LiveSearchViewModel() { ControlId = "ddl-livesearch" });
+                    }
+                    <div id="ddl-livesearch" class="form-text"> (Single) This data is comming from MS Graph API.</div>
+                </div>
+                <hr />
+                <div>
+                    <label for="ddl-chatsearch" class="form-label">Group Chat</label>
+                    @{
+                        await Html.RenderPartialAsync("~/Views/_Core/SelectList/_LiveSearch.cshtml", new LiveSearchViewModel() { ControlId = "ddl-chatsearch" });
+                    }
+                    <div id="ddl-chatsearch" class="form-text"> (Single) This data is comming from MS Graph API.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- DotNet8 API -->
+    <div class="col-md col-md-4 mb-3">
+        <div id="cardEmail" class="card">
+            <h5 class="card-header">Email Notification</h5>
+            <div class="card-body">
+                <div>
+                    <label for="txt-emailrecipient" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="txt-emailrecipient" value="jonathan.deguzman@sitel.com" />
+                </div>
+                <div>
+                    <label for="txt-emailmessage" class="form-label">Message</label>
+                    <textarea type="text" class="form-control" id="txt-emailmessage"></textarea>
+                </div>
+                <div class="text-center mt-4">
+                    <button id="btn-sendEmail" class="btn btn-sm btn-primary"><span class="mdi mdi-email-fast-outline me-1"></span>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md col-md-4 mb-3">
+        <div id="cardOneOnOne" class="card">
+            <h5 class="card-header">1-on-1 Chat Notification</h5>
+            <div class="card-body">
+                <div>
+                    <label for="txt-oneononerecipient" class="form-label">User</label>
+                    <input type="text" class="form-control" id="txt-oneononerecipient" value="jonathan.deguzman@sitel.com"/>
+                </div>
+                <div>
+                    <label for="txt-oneononemessage" class="form-label">Message</label>
+                    <textarea type="text" class="form-control" id="txt-oneononemessage"></textarea>
+                </div>
+                <div class="text-center mt-4">
+                    <button id="btn-sendOneOnOne" class="btn btn-sm btn-primary"><span class="mdi mdi-email-fast-outline me-1"></span>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md col-md-4 mb-3">
+        <div id="cardGroup" class="card">
+            <h5 class="card-header">GroupChat Notification</h5>
+            <div class="card-body">
+                <div>
+                    <label for="txt-grouprecipient" class="form-label">Groupchat Id</label>
+                    <input type="text" class="form-control" id="txt-grouprecipient" value="19:c8b57fa6ca614b83ab9e97be1675abf6@thread.v2" />
+                </div>
+                <div>
+                    <label for="txt-groupmessage" class="form-label">Message</label>
+                    <textarea type="text" class="form-control" id="txt-groupmessage"></textarea>
+                </div>
+                <div class="text-center mt-4">
+                    <button id="btn-sendGroup" class="btn btn-sm btn-primary"><span class="mdi mdi-email-fast-outline me-1"></span>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageScripts {
+    <script src="~/js/_core/live-search.js" asp-append-version="true"></script>
+    <script src="~/js/home/sampleonly-demo.js" asp-append-version="true"></script>
+}

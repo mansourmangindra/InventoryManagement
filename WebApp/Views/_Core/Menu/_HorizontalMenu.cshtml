@@ -1,0 +1,62 @@
+﻿@{
+    string currentPage = ViewContext.HttpContext.Request.Path;
+}
+
+<!-- Menu -->
+<aside id="layout-menu" class="layout-menu-horizontal menu-horizontal  menu bg-menu-theme flex-grow-0">
+    <div class='container-fluid d-flex h-100'>
+        @* ! Full version menu-items *@
+        <ul class="menu-inner">
+            <!-- Layout -->
+            <li class='menu-item@(currentPage.StartsWith("/SampleOnly/Layout") ? " active" : "")'>
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
+                    <div>Layout</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class='menu-item@(currentPage == "/SampleOnly/Layout/Vertical" ? " active" : "")'>
+                        <a asp-controller="SampleOnly" asp-action="VerticalLayout" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-dock-left"></i>
+                            <div>Vertical</div>
+                        </a>
+                    </li>
+                    <li class='menu-item@(currentPage == "/SampleOnly/Layout/Horizontal" ? " active" : "")'>
+                        <a asp-controller="SampleOnly" asp-action="HorizontalLayout" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-dock-top"></i>
+                            <div>Horizontal</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class='menu-item @(currentPage.StartsWith("/Error") || currentPage.StartsWith("/User") ? " active open" : "")'>
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-database-edit-outline"></i>
+                    <div>Module</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class='menu-item@(currentPage.StartsWith("/Error") ? " active" : "")'>
+                        <a asp-controller="Error" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-bug"></i>
+                            <div>Error</div>
+                        </a>
+                    </li>
+                    <li class='menu-item@(currentPage.StartsWith("/User") ? " active" : "")'>
+                        <a asp-controller="User" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-account-key"></i>
+                            <div>User</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Sample -->
+            <li class='menu-item@(currentPage == "/SampleOnly/Demo" ? " active" : "")'>
+                <a asp-controller="SampleOnly" asp-action="Demo" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
+                    <div>Sample Integration</div>
+                </a>
+            </li>
+            <!-- Sample -->
+        </ul>
+    </div>
+</aside>
+<!-- / Menu -->

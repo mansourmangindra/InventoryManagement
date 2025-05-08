@@ -1,0 +1,32 @@
+﻿@model Common.DataTransferObjects._Core.BasicFilter.KeywordDateRangePagination
+@using Common.Constants
+
+<div class="row">
+    <div class="col-md-7 mb-3">
+        <label for="txtKeyword" class="form-label">Keyword</label>
+        <input id="txtKeyword" class="form-control form-control" type="text" placeholder="Search Keyword" />
+    </div>
+    <div class="col-md-3 mb-3">
+        @{
+            string dateRange = "";
+            if (Model != null && Model.StartDate != null && Model.EndDate != null)
+            {
+                dateRange = Model.StartDate?.ToString(FormatConstant.DateFormat) + " - " + Model.EndDate?.ToString(FormatConstant.DateFormat);
+            }
+        }
+        <label for="txtDateRange" class="form-label">Date Range</label>
+        <input id="txtDateRange" class="form-control form-control" type="text" placeholder="01/01/2020 - 12/31/2024" />
+    </div>
+    <div class="col-md-2 mb-3">
+        <label for="ddlPageSize" class="form-label">Page Size</label>
+        @await Component.InvokeAsync("PageSizeSelectList", new { controlId = "ddlPageSize", selectedValues = Model?.PageSize.ToString()})
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <button class="btn btn-sm btn-primary" id="btnSearch"><em class="fas fa-search me-1"></em> Search</button>
+            <button class="btn btn-sm btn-outline-secondary me-2" id="btnClearInput"><em class="fas fa-eraser me-1"></em> Clear Filter</button>
+        </div>
+    </div>
+</div>
