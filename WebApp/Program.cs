@@ -41,6 +41,24 @@ builder.Services.AddAntiforgery(options =>
 });
 
 
+//IServices
+builder.Services.AddSingleton<IReferenceDataService, ReferenceDataService>();
+builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
+
+
+
+/*RESPONSE HEADER & SECURITY*/
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+});
+
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "DotNet8-RV-Token";
+});
+
 
 var app = builder.Build();
 
@@ -65,6 +83,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 await app.RunAsync();

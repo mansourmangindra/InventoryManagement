@@ -1,0 +1,24 @@
+﻿@model WebApp.Models.Error.StatusPageViewModel
+
+@{
+    Layout = "~/Views/_Core/Layout/_BlankLayout.cshtml";
+    ViewData["title"] = "Error";
+}
+
+<div class="misc-wrapper text-center">
+    <h1 class="mb-2 mx-2" style="font-size: 3rem;">@Model.Title</h1>
+    <h4 class="mb-2">@Model.SubTitle</h4>
+    <p class="mb-4 mx-2">@Model.Message</p>
+    <div class="d-flex justify-content-center mt-5">
+        <div class="d-flex flex-column align-items-center">
+            <img src="@Url.Content(Model.ImagePath)" alt="misc-error" class="misc-model img-fluid z-1" width="780">
+            <div>
+                <a href="/" class="btn btn-primary text-center my-4">Back to home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageStyles {
+    <link rel="stylesheet" href="~/css/error/status-page.css" asp-append-version="true" />
+}

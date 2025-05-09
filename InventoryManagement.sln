@@ -7,21 +7,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{E37A09
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{FBDAA5E1-77B0-4C4F-ABAB-B49410386478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{05AA9AFC-1C0D-4809-934E-3A403DD1FF6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{05AA9AFC-1C0D-4809-934E-3A403DD1FF6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{1BF34504-1ABD-4A16-8439-9BBA243EAD98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{1BF34504-1ABD-4A16-8439-9BBA243EAD98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{1C99CB47-D62A-4563-A8A1-0E7055081668}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyInfo.cs = AssemblyInfo.cs
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiConfiguration", "ApiConfiguration\ApiConfiguration.csproj", "{78A4A940-8D58-4693-BEA0-055D54C9D372}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiConfiguration", "ApiConfiguration\ApiConfiguration.csproj", "{78A4A940-8D58-4693-BEA0-055D54C9D372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{850B76D7-4E4E-4AD3-9A94-A49ECF1501B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{850B76D7-4E4E-4AD3-9A94-A49ECF1501B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{87534D40-E9F9-4C75-AAF0-0D701C8AABE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{A079086A-F005-4EBC-AE16-056360B5CEA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{A079086A-F005-4EBC-AE16-056360B5CEA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConfiguration", "ClientConfiguration\ClientConfiguration.csproj", "{5BDBB299-AF53-420A-81F1-BE1770F7F3FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientConfiguration", "ClientConfiguration\ClientConfiguration.csproj", "{5BDBB299-AF53-420A-81F1-BE1770F7F3FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

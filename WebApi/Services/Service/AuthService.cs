@@ -1,9 +1,11 @@
 ﻿using ApiConfiguration.Service;
 using Common.Constants;
+using Common.DataTransferObjects._Core.ErrorLog;
 using Common.DataTransferObjects.Role;
 using Common.DataTransferObjects.User;
 using DataAccess.DbContexts.InventoryManagement.Models;
 using DataAccess.UnitOfWorks.InventoryManagement;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using WebApi.DbContexts.InventoryManagement.Models;
 using User = DataAccess.DbContexts.InventoryManagement.Models.User;
@@ -50,6 +52,10 @@ namespace WebApi.Services.Registration
             var user = await _inventoryUnitOfWork.UserRepository.FirstOrDefaultAsync(u => u.EmailAddress.ToLower() == loginRequest.EmailAddress.ToLower());
 
             if (user == null)
+            {
+                return new LoginResponse() { User = null, Token = "" };
+            }
+            else if (user.EmailAddress != loginRequest.EmailAddress || user.Password != loginRequest.Password)
             {
                 return new LoginResponse() { User = null, Token = "" };
             }

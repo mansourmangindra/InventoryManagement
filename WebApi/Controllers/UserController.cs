@@ -45,19 +45,6 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest model)
-        {
-            var loginResponse = await _authService.Login(model);
-
-            if (loginResponse.User == null)
-            {
-                return BadRequest(new ErrorMessage("Username or password is incorrect"));
-            }
-
-            //_response.Result = loginResponse;
-            return Ok(model);
-
-        }
+        
     }
 }

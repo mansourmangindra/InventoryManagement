@@ -1,0 +1,55 @@
+﻿@model Common.DataTransferObjects._Core.ErrorLog.ErrorLogDetail
+
+@{
+    ViewData["title"] = "Error Detail";
+}
+
+<div class="card card-default">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="info-container">
+                    <h5 class="border-bottom pb-3">Error  Details</h5>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2">
+                            <span class="h6 me-1">Error ID:</span>
+                            <span>@Model.ErrorId</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Stack Trace ID:</span>
+                            <span>@Model.StackTraceId</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Error Message:</span>
+                            <span>@Model.Message</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Stack Trace:</span>
+                            <span>@Model.StackTrace</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Route:</span>
+                            <span>@Model.Path</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Error Date:</span>
+                            <span>@Model.DateCreated</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Source:</span>
+                            <span>@Model.Source</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">User Identity:</span>
+                            <span>@Model.UserIdentity</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="h6 me-1">Build Version:</span>
+                            <span>@Model.BuildVersion</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

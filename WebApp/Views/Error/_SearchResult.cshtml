@@ -1,0 +1,47 @@
+﻿@model Common.DataTransferObjects._Core.CollectionPaging.PagedList<Common.DataTransferObjects._Core.ErrorLog.ErrorLogDetail>
+
+<div class="table-responsive text-nowrap">
+    <table class="table table-hover table-sm">
+        <thead class="border-top table-light">
+            <tr>
+                <th scope="col" class="icon-w-40"></th>
+                <th scope="col">Stack Trace Id</th>
+                <th scope="col">Message</th>
+                <th scope="col">Error Date</th>
+                <th scope="col">User Identity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items == null || !Model.Items.Any())
+            {
+                <tr>
+                    <td colspan="3" class="text-center">No record found</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Error"
+                                asp-action="Detail"
+                                asp-route-id="@item.ErrorId"
+                                class="btn btn-sm btn-text-secondary rounded-pill btn-icon"
+                                target="_blank">
+                                <i class="mdi mdi-eye-outline"></i>
+                            </a>
+                        </td>
+                        <td>@item.StackTraceId</td>
+                        <td>@item.Message</td>
+                        <td>@item.DateCreated</td>
+                        <td>@item.UserIdentity</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    await Html.RenderPartialAsync("~/Views/_Core/Paging/_SearchResultPaging.cshtml", Model);
+}

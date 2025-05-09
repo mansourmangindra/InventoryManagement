@@ -3,9 +3,19 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <Nullable>disable</Nullable>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <Deterministic>false</Deterministic>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Compile Include="..\AssemblyInfo.cs" Link="AssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="DataTransferObjects\CollectionPaging\**" />
+		<EmbeddedResource Remove="DataTransferObjects\CollectionPaging\**" />
+		<None Remove="DataTransferObjects\CollectionPaging\**" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

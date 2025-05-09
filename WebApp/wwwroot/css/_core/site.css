@@ -1,3 +1,24 @@
 .icon-w-40 {
     width: 40px;
 }
+
+.authentication-wrapper {
+    --bs-auth-basic-inner-max-width: 460px;
+    display: flex;
+    flex-basis: 100%;
+    inline-size: 100%;
+    min-block-size: 100vh;
+}
+
+    .authentication-wrapper.authentication-basic {
+        align-items: center;
+        justify-content: center;
+    }
+
+.container-p-y:not([class^=pb-],[class*=" pb-"]) {
+    padding-block-end: 1.5rem !important;
+}
+
+.container-p-y:not([class^=pt-],[class*=" pt-"]) {
+    padding-block-start: 1.5rem !important;
+}
