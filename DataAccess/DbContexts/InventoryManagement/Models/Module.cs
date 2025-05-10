@@ -12,11 +12,13 @@ public partial class Module
     [Key]
     public short ModuleId { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string UpdatedBy { get; set; } = null!;
+    public string UpdatedBy { get; set; }
 
     public DateTime UpdatedDate { get; set; }
 

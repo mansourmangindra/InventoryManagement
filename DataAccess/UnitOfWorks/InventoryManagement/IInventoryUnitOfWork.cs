@@ -10,6 +10,7 @@ namespace DataAccess.UnitOfWorks.InventoryManagement
         public IUserRepository UserRepository { get; }
         public IUserRoleRepository UserRoleRepository { get; }
         public IRoleRepository RoleRepository { get; }
+        public IUserProfileRepository UserProfileRepository { get; }
         
         
     }

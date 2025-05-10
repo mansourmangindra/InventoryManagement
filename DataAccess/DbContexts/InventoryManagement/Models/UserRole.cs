@@ -16,12 +16,14 @@ public partial class UserRole
 
     public short RoleId { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
+    [Required]
     [Column("UpdatedBY")]
     [StringLength(100)]
-    public string UpdatedBy { get; set; } = null!;
+    public string UpdatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
@@ -31,5 +33,9 @@ public partial class UserRole
 
     [ForeignKey("RoleId")]
     [InverseProperty("UserRoles")]
-    public virtual Role Role { get; set; } = null!;
+    public virtual Role Role { get; set; }
+
+    [ForeignKey("UserId")]
+    [InverseProperty("UserRoles")]
+    public virtual User User { get; set; }
 }

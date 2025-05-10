@@ -6,27 +6,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.DbContexts.InventoryManagement.Models;
 
-[Table("User")]
-public partial class User
+[Keyless]
+[Table("UserProfile")]
+public partial class UserProfile
 {
-    [Key]
+    public int UserProfileId { get; set; }
+
     public int UserId { get; set; }
 
     [Required]
-    [StringLength(100)]
-    public string Name { get; set; }
-
-    [Required]
-    [StringLength(100)]
-    public string PhoneNumber { get; set; }
-
-    [Required]
-    [StringLength(100)]
-    public string EmailAddress { get; set; }
+    [StringLength(255)]
+    public string ProfileImageUrl { get; set; }
 
     [Required]
     [StringLength(500)]
-    public string Password { get; set; }
+    public string Bio { get; set; }
+
+    [Required]
+    [StringLength(10)]
+    public string Gender { get; set; }
 
     [Required]
     [StringLength(100)]
@@ -42,6 +40,6 @@ public partial class User
 
     public bool Active { get; set; }
 
-    [InverseProperty("User")]
-    public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    [ForeignKey("UserId")]
+    public virtual User User { get; set; }
 }

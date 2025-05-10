@@ -12,8 +12,9 @@ public partial class AuditTrail
     [Key]
     public long AuditTrailId { get; set; }
 
+    [Required]
     [StringLength(200)]
-    public string TransactionBy { get; set; } = null!;
+    public string TransactionBy { get; set; }
 
     public DateTime TransactionDate { get; set; }
 

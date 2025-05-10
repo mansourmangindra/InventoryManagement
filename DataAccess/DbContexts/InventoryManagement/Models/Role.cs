@@ -12,22 +12,30 @@ public partial class Role
     [Key]
     public short RoleId { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string UpdatedBy { get; set; } = null!;
+    public string UpdatedBy { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string CreatedDate { get; set; } = null!;
+    public string CreatedDate { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string UpdatedDate { get; set; } = null!;
+    public string UpdatedDate { get; set; }
 
     public bool Active { get; set; }
+
+    [InverseProperty("Role")]
+    public virtual ICollection<RoleModule> RoleModules { get; set; } = new List<RoleModule>();
 
     [InverseProperty("Role")]
     public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();

@@ -14,22 +14,28 @@ public partial class AuditTrailDetail
 
     public long AuditTrailId { get; set; }
 
-    public string EntityId { get; set; } = null!;
+    [Required]
+    public string EntityId { get; set; }
 
+    [Required]
     [StringLength(50)]
-    public string TableName { get; set; } = null!;
+    public string TableName { get; set; }
 
+    [Required]
     [StringLength(50)]
-    public string EntityField { get; set; } = null!;
+    public string EntityField { get; set; }
 
-    public string OldValue { get; set; } = null!;
+    [Required]
+    public string OldValue { get; set; }
 
-    public string NewValue { get; set; } = null!;
+    [Required]
+    public string NewValue { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string Action { get; set; } = null!;
+    public string Action { get; set; }
 
     [ForeignKey("AuditTrailId")]
     [InverseProperty("AuditTrailDetails")]
-    public virtual AuditTrail AuditTrail { get; set; } = null!;
+    public virtual AuditTrail AuditTrail { get; set; }
 }

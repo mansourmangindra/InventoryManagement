@@ -2,6 +2,7 @@ using Common.Constants;
 using Common.DataTransferObjects._Core.AppSettings;
 using WebApp.Services.Interfaces;
 using WebApp.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,10 @@ builder.Services.AddControllersWithViews();
 
 //IServices
 builder.Services.AddSingleton<IReferenceDataService, ReferenceDataService>();
+builder.Services.AddSingleton<ISecurityService, SecurityService>();
+builder.Services.AddSingleton<ITokenProvider, TokenProvider>();
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddHttpContextAccessor();
 
 
@@ -29,17 +33,6 @@ builder.Services.AddHttpClient(HttpClientConstant.InventoryApiNamedClient, opt =
     opt.Timeout = TimeSpan.FromMinutes(5);
     opt.BaseAddress = new Uri(httpResourceEndpoint.InventoryApiBaseUrl);
 });
-
-builder.Services.AddHsts(options =>
-{
-    options.MaxAge = TimeSpan.FromDays(365);
-});
-
-builder.Services.AddAntiforgery(options =>
-{
-    options.HeaderName = "Inventory-RV-Token";
-});
-
 
 //IServices
 builder.Services.AddSingleton<IReferenceDataService, ReferenceDataService>();
@@ -58,6 +51,14 @@ builder.Services.AddAntiforgery(options =>
 {
     options.HeaderName = "DotNet8-RV-Token";
 });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromHours(10);
+        options.LoginPath = "/Login/Login";
+        options.AccessDeniedPath = "/Login/AccessDenied";
+    });
 
 
 var app = builder.Build();

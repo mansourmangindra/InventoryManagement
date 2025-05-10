@@ -30,6 +30,8 @@ public partial class InventoryManagementDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UserProfile> UserProfiles { get; set; }
+
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -62,6 +64,24 @@ public partial class InventoryManagementDbContext : DbContext
             entity.HasOne(d => d.Module).WithMany(p => p.RoleModules)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RoleModule_Module");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.RoleModules)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RoleModule_Role");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.Property(e => e.Password).UseCollation("Latin1_General_BIN2");
+        });
+
+        modelBuilder.Entity<UserProfile>(entity =>
+        {
+            entity.Property(e => e.UserProfileId).ValueGeneratedOnAdd();
+
+            entity.HasOne(d => d.User).WithMany()
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserProfile_User");
         });
 
         modelBuilder.Entity<UserRole>(entity =>
@@ -69,6 +89,10 @@ public partial class InventoryManagementDbContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserRole_Role");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserRole_User");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -24,13 +24,14 @@ namespace WebApi.Services.Registration
         }
         public async Task<string> Register(string transactionBy, SaveUser saveUserDto)
         {
-            var passwordHasher = new PasswordHasher<User>();
+            //var passwordHasher = new PasswordHasher<User>();
 
             User user = new()
             {
                 Name = saveUserDto.Name,
                 PhoneNumber = saveUserDto.PhoneNumber,
                 EmailAddress = saveUserDto.EmailAddress,
+                Password = saveUserDto.Password,
                 CreatedBy = saveUserDto.CreatedBy,
                 UpdatedBy = saveUserDto.UpdatedBy,
                 CreatedDate = saveUserDto.CreatedDate,
@@ -38,7 +39,7 @@ namespace WebApi.Services.Registration
                 Active = true
             };
 
-            user.Password = passwordHasher.HashPassword(user, saveUserDto.Password);
+            //user.Password = passwordHasher.HashPassword(user, saveUserDto.Password);
 
             await _inventoryUnitOfWork.UserRepository.AddAsync(user);
             await _inventoryUnitOfWork.SaveChangesAsync(transactionBy);

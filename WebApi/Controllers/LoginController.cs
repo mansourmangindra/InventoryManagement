@@ -33,7 +33,7 @@ namespace WebApi.Controllers
 
 
             //_response.Result = loginResponse;
-            return Ok();
+            return Ok(loginResponse);
 
         }
     }

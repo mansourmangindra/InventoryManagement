@@ -10,11 +10,11 @@ namespace Common.Constants
         public const string DateStringFormat = "{0:" + DateFormat + "}";
         public const string DateTimeFileFormat = "MMddyyyyHHmmss";
 
-        private static readonly ReadOnlyCollection<string> InvalidDomains = new(new[] { "sykes.com", "connect.sitel.com", "sitel.com" });
+        //private static readonly ReadOnlyCollection<string> InvalidDomains = new(new[] { "sykes.com", "connect.sitel.com", "sitel.com" });
 
-        public static ReadOnlyCollection<string> InvalidEmailAddresses
-        {
-            get { return InvalidDomains; }
-        }
+        //public static ReadOnlyCollection<string> InvalidEmailAddresses
+        //{
+        //    get { return InvalidDomains; }
+        //}
     }
 }

@@ -19,12 +19,14 @@ namespace DataAccess.UnitOfWorks.InventoryManagement
             UserRepository = new UserRepository(_context);
             UserRoleRepository = new UserRoleRepository(_context);
             RoleRepository = new RoleRepository(_context);
+            UserProfileRepository = new UserProfileRepository(_context);
         }
 
         public IErrorLogRepository ErrorLogRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }
         public IUserRoleRepository UserRoleRepository { get; private set; }
         public IRoleRepository RoleRepository { get; private set; }
+        public IUserProfileRepository UserProfileRepository { get; private set; }
 
         public void Dispose()
         {

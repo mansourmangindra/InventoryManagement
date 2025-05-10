@@ -16,8 +16,9 @@ public partial class RoleModule
 
     public short ModuleId { get; set; }
 
+    [Required]
     [StringLength(100)]
-    public string UpdatedBy { get; set; } = null!;
+    public string UpdatedBy { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime UpdatedDate { get; set; }
@@ -26,5 +27,9 @@ public partial class RoleModule
 
     [ForeignKey("ModuleId")]
     [InverseProperty("RoleModules")]
-    public virtual Module Module { get; set; } = null!;
+    public virtual Module Module { get; set; }
+
+    [ForeignKey("RoleId")]
+    [InverseProperty("RoleModules")]
+    public virtual Role Role { get; set; }
 }
