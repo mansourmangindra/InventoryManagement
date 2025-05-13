@@ -49,7 +49,7 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddAntiforgery(options =>
 {
-    options.HeaderName = "DotNet8-RV-Token";
+    options.HeaderName = "Inventory-RV-Token";
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
