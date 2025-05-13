@@ -7,7 +7,6 @@ using DataAccess.DbContexts.InventoryManagement.Models;
 using DataAccess.UnitOfWorks.InventoryManagement;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
-using WebApi.DbContexts.InventoryManagement.Models;
 using User = DataAccess.DbContexts.InventoryManagement.Models.User;
 
 namespace WebApi.Services.Registration
@@ -24,24 +23,38 @@ namespace WebApi.Services.Registration
         }
         public async Task<string> Register(string transactionBy, SaveUser saveUserDto)
         {
-            //var passwordHasher = new PasswordHasher<User>();
-
             User user = new()
             {
                 Name = saveUserDto.Name,
-                PhoneNumber = saveUserDto.PhoneNumber,
+                PhoneNumber = "000",
                 EmailAddress = saveUserDto.EmailAddress,
                 Password = saveUserDto.Password,
-                CreatedBy = saveUserDto.CreatedBy,
-                UpdatedBy = saveUserDto.UpdatedBy,
-                CreatedDate = saveUserDto.CreatedDate,
-                UpdatedDate = saveUserDto.UpdatedDate,
+                CreatedBy = transactionBy,
+                UpdatedBy = transactionBy,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
                 Active = true
             };
 
-            //user.Password = passwordHasher.HashPassword(user, saveUserDto.Password);
-
             await _inventoryUnitOfWork.UserRepository.AddAsync(user);
+
+            await _inventoryUnitOfWork.SaveChangesAsync(transactionBy);
+
+            UserRole userRole = new()
+            {
+                UserId = user.UserId,
+                RoleId = IMConstant.CUSTOMER_ID,
+                CreatedBy = transactionBy,
+                UpdatedBy = transactionBy,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
+                Active = true
+            };
+
+            await _inventoryUnitOfWork.UserRoleRepository.AddAsync(userRole);
+
+
+
             await _inventoryUnitOfWork.SaveChangesAsync(transactionBy);
 
             return user.UserId.ToString();

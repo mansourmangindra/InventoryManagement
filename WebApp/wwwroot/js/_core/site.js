@@ -126,7 +126,7 @@ let App = function () {
                 data: _data,
                 dataType: _dataType,
                 contentType: "application/json; charset=utf-8",
-                headers: _methodType === 'GET' ? {} : { 'DotNet8-RV-Token': $('input[name="__RequestVerificationToken"]').val() },
+                headers: _methodType === 'GET' ? {} : { 'Inventory-RV-Token': $('input[name="__RequestVerificationToken"]').val() },
                 success: function (data) {
                     App.ajaxSuccess(_successFn, data);
                 },
@@ -240,6 +240,27 @@ let App = function () {
             }
             return validationMessages;
         },
+        requiredText: function (_control, _message, _validationMessages) {
+            _control.removeClass("is-invalid");
+            let value = _control.val();
+            if (value == undefined || value.trim() == '') {
+                _validationMessages.push(_message);
+                _control.addClass("is-invalid");
+            }
+
+            return _validationMessages;
+        },
+        requiredSingleSelect: function (_control, _allowZero, _message, _validationMessages) {
+            _control.parent().removeClass("is-invalid");
+            let value = _control.val();
+            if (value == undefined || value == '' || (!_allowZero && value == '0')) {
+                _validationMessages.push(_message);
+                _control.parent().addClass("is-invalid");
+            }
+
+            return _validationMessages;
+        },
+        //This is for Dropdown validator
         requiredSingleSelectValidator: function (value, message, control, allowZero, validationMessages) {
             if (value == undefined || value == '' || (!allowZero && value == '0')) {
                 validationMessages.push(message);

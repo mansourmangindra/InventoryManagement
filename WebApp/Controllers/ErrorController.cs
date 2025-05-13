@@ -22,6 +22,8 @@ namespace WebApp.Controllers
             _httpClient = httpClientFactory.CreateClient(HttpClientConstant.InventoryApiNamedClient);
         }
 
+
+        [Authorize(Policy = InventoryPolicyConstant.ErrorLogPolicy)]
         [HttpGet]
         public ActionResult Index(KeywordDateRangePagination filter)
         {
@@ -33,6 +35,8 @@ namespace WebApp.Controllers
             return View("Views/Error/Index.cshtml", filter);
         }
 
+
+        [Authorize(Policy = InventoryPolicyConstant.ErrorLogPolicy)]
         [HttpGet]
         [Route("_searchresult")]
         public async Task<IActionResult> SearchResult(KeywordDateRangePagination filter)
@@ -52,6 +56,7 @@ namespace WebApp.Controllers
             return BadRequest(await response.GetErrorMessage());
         }
 
+        [Authorize(Policy = InventoryPolicyConstant.ErrorLogPolicy)]
         [HttpGet]
         [Route("Detail/{id}")]
         public async Task<IActionResult> Detail([FromRoute] int id)
