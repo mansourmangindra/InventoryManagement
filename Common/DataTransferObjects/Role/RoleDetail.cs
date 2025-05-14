@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common.DataTransferObjects.RoleModule;
+using Common.DataTransferObjects.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +17,8 @@ namespace Common.DataTransferObjects.Role
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Active { get; set; }
+
+        public IEnumerable<RoleModuleDetail> RoleModuleDetails { get; set; }
+        public IEnumerable<UserDetail> ListOfUsers { get; set; }
     }
 }

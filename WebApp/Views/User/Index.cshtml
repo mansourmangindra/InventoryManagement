@@ -1,0 +1,90 @@
+﻿@model Common.DataTransferObjects.User.UserDetail
+@using Common.Constants
+@using WebApp.Models.SelectList
+
+<input type="hidden" id="hdnUserId" value="@Model?.UserId" />
+
+<div class="row">
+    <div class="col-lg-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary" id="divUserCard">
+
+                    <div class="card-body pb-0">
+                        <h5 class="border-bottom pb-3 card-title">User</h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="divUserFormContainer">
+                            @{
+                                await Html.RenderPartialAsync("~/Views/UserManagement/_Form.cshtml", Model);
+                            }
+                        </div>
+                        <br />
+
+                        @if (ViewData["ViewMode"].ToString() == ViewModeConstant.Update)
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-sm btn-primary" id="btnUpdateUser"><em class="fa fa-save"></em>&nbsp;Update</button>
+                                        <button class="btn btn-sm btn-danger" id="btnDeleteUser"><em class="fa fa-eraser"></em>&nbsp;Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-sm btn-primary" id="btnCreateUser"><em class="fa fa-plus-square"></em>&nbsp;Create</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="row">
+            @if (ViewData["ViewMode"].ToString() == ViewModeConstant.Update)
+            {
+                <div class="col-lg-12">
+                    <div class="card card-outline card-primary" id="divUserRoleCard">
+
+                        <div class="card-body pb-0">
+                            <h5 class="border-bottom pb-3 card-title">Roles</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div id="divUserRoleListContainer">
+                            </div>
+
+                            <br />
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-default float-right btn-sm mr-2 btnAddUserRole"><em class="fa fa-plus-circle"></em>&nbsp;Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@{
+    await Html.RenderPartialAsync("~/Views/_Core/Modal/_CrudModal.cshtml");
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/_Core/Modal/_ConfirmationModal.cshtml");
+}
+
+@section PageScripts
+{
+    <script src="~/js/_core/modal/crud-modal.js"></script>
+    <script src="~/js/_core/modal/confirmation-modal.js"></script>
+    <script src="~/js/user/usermanagement.js"></script>
+    <script src="~/js/user/userrolemanagement.js"></script>
+}

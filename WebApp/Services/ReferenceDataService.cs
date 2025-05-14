@@ -92,5 +92,17 @@ namespace WebApp.Services
             ErrorMessage errorMessage = await response.GetErrorMessage();
             throw new ArgumentException(errorMessage.Message);
         }
+
+        public string ConvertBoleanToYesOrNo(bool bolean)
+        {
+            if (bolean)
+            {
+                return "Yes";
+            }
+            else
+            {
+                return "No";
+            }
+        }
     }
 }

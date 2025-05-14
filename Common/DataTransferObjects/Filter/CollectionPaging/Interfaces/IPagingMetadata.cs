@@ -1,4 +1,4 @@
-﻿namespace Common.DataTransferObjects._Core.CollectionPaging.Interfaces
+﻿namespace Common.DataTransferObjects.Filter.CollectionPaging.Interfaces
 {
     public interface IPagingMetadata
     {

@@ -1,0 +1,59 @@
+﻿@model Common.DataTransferObjects.User.UserDetail
+@using Common.Constants
+
+<input type="hidden" id="hdnUserId" value="@Model?.UserId" />
+
+<div class="row mb-3">
+    <label class="col-sm-4 col-control-label">Employee Name<span class="text-danger">*</span></label>
+    <div class="col-sm-8">
+        <input type="text" id="txtName" class="form-control form-control-sm" value="@Model?.Name" disabled />
+    </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 col-control-label">Employee Number<span class="text-danger">*</span></label>
+    <div class="col-sm-8">
+        <input type="text" id="txtPhoneNumber" class="form-control form-control-sm" value="@Model?.PhoneNumber" disabled />
+    </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 col-control-label">User Principal Name<span class="text-danger">*</span></label>
+    <div class="col-sm-8">
+        <input type="text" id="txtEmailAddress" class="form-control form-control-sm" value="@Model?.EmailAddress" disabled />
+    </div>
+</div>
+<div class="row mb-3">
+    <label class="col-sm-4 col-control-label">Active</label>
+    <div class="col-sm-8">
+        @if (Model != null && !Model.Active)
+        {
+            <input id="chkUserActive" type="checkbox" />
+        }
+        else
+        {
+            <input id="chkUserActive" type="checkbox" checked />
+        }
+    </div>
+</div>
+
+@if (ViewData["ViewMode"].ToString() == ViewModeConstant.Update)
+{
+    <div class="row mb-3">
+        <label class="col-sm-4 col-control-label">Updated By</label>
+        <label class="col-sm-8 col-control-label font-weight-normal">@Model?.UpdatedBy</label>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-4 col-control-label">Updated UTC Date</label>
+        <label class="col-sm-8 col-control-label font-weight-normal">@Model?.UpdatedDate.ToString(FormatConstant.DateTimeFormat)</label>
+    </div>
+}
+
+@{
+    await Html.RenderPartialAsync("~/Views/_Core/Modal/_ConfirmationModalNoComment.cshtml", Model);
+}
+
+@section PageScripts {
+    <script src="~/js/xls.core.min.js"></script>
+    <script src="~/js/xlsx.core.min.js"></script>
+    <script src="~/js/ConfirmationModal.js"></script>
+    <script src="~/js/user/userfiltersearchbar.js"></script>
+}

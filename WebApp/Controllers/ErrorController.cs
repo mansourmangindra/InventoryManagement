@@ -1,8 +1,8 @@
 ﻿using Common.Constants;
-using Common.DataTransferObjects._Core.BasicFilter;
-using Common.DataTransferObjects._Core.CollectionPaging;
 using Common.DataTransferObjects._Core.ErrorLog;
 using Common.DataTransferObjects._Core.Version;
+using Common.DataTransferObjects.Filter;
+using Common.DataTransferObjects.Filter.CollectionPaging;
 using Common.Extension;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
@@ -25,7 +25,7 @@ namespace WebApp.Controllers
 
         [Authorize(Policy = InventoryPolicyConstant.ErrorLogPolicy)]
         [HttpGet]
-        public ActionResult Index(KeywordDateRangePagination filter)
+        public ActionResult Index(KeywordDateRangeActivePagination filter)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace WebApp.Controllers
         [Authorize(Policy = InventoryPolicyConstant.ErrorLogPolicy)]
         [HttpGet]
         [Route("_searchresult")]
-        public async Task<IActionResult> SearchResult(KeywordDateRangePagination filter)
+        public async Task<IActionResult> SearchResult(KeywordDateRangeActivePagination filter)
         {
             if (!ModelState.IsValid)
             {

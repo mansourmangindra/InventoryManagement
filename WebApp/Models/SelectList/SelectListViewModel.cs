@@ -7,5 +7,6 @@ namespace WebApp.Models.SelectList
         public string ControlId { get; set; }
         public bool ReadOnly { get; set; }
         public virtual IEnumerable<SelectListItem> ListItems { get; set; }
+        public string OptionLabel { get; set; }
     }
 }

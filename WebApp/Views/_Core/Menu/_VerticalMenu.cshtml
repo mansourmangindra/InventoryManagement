@@ -29,32 +29,36 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-
-        <!-- Layout -->
-        <li class='menu-item @(currentPage.StartsWith("/SampleOnly/Layout") ? " active open" : "")'>
+        <!-- User Management -->
+        <li class='menu-item @(currentPage.StartsWith("/User") ? " active open" : "")'>
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons mdi mdi mdi-dock-left"></i>
-                <div>Layout</div>
+                <em class="menu-icon fa-solid fa-user-shield"></em>
+                <div>User Management</div>
             </a>
             <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/SampleOnly/Layout/Vertical" ? " active" : "")'>
-                    <a asp-controller="SampleOnly" asp-action="VerticalLayout" class="menu-link">
-                        <div>Vertical</div>
+                <li class='menu-item@(currentPage == "/User" ? " active" : "")'>
+                    <a asp-controller="UserManagement" asp-action="Index" class="menu-link">
+                        <div>Create</div>
                     </a>
                 </li>
-                <li class='menu-item@(currentPage == "/SampleOnly/Layout/Horizontal" ? " active" : "")'>
-                    <a asp-controller="SampleOnly" asp-action="HorizontalLayout" class="menu-link">
-                        <div>Horizontal</div>
+                <li class='menu-item@(currentPage == "/User/Search" ? " active" : "")'>
+                    <a asp-controller="UserManagement" asp-action="Search" class="menu-link">
+                        <div>Search</div>
                     </a>
                 </li>
             </ul>
         </li>
-        <!-- Layout -->
+        <!-- User Management -->
         <!-- Module -->
         @if (await _securityService.WithRole(new short[] { IMConstant.ADMIN }, User))
 
+
+
         {
-            <li class='menu-item @(currentPage.StartsWith("/Error") || currentPage.StartsWith("/User") ? " active open" : "")'>
+            
+
+            <!-- Error Log -->
+            <li class='menu-item @(currentPage.StartsWith("/Error") || currentPage.StartsWith("/Error") ? " active open" : "")'>
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons mdi mdi-database-edit-outline"></i>
                     <div>Module</div>
@@ -72,16 +76,9 @@
                     </li>
                 </ul>
             </li>
+            <!-- Error Log -->
         }
         <!-- Module -->
-        <!-- Sample -->
-        <li class='menu-item@(currentPage == "/SampleOnly/Demo" ? " active" : "")'>
-            <a asp-controller="SampleOnly" asp-action="Demo" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
-                <div>Sample Integration</div>
-            </a>
-        </li>
-        <!-- Sample -->
 
 
     </ul>

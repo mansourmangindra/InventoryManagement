@@ -1,7 +1,7 @@
-﻿using Common.DataTransferObjects._Core.CollectionPaging.Interfaces;
+﻿using Common.DataTransferObjects.Filter.CollectionPaging.Interfaces;
 using Newtonsoft.Json;
 
-namespace Common.DataTransferObjects._Core.CollectionPaging
+namespace Common.DataTransferObjects.Filter.CollectionPaging
 {
     public class PagingMetadata : IPagingMetadata
     {
@@ -17,8 +17,6 @@ namespace Common.DataTransferObjects._Core.CollectionPaging
 
         public bool HasNext { get; private set; }
 
-        public string PageClickEvent { get; set; }
-
         [JsonConstructor]
         public PagingMetadata(int currentPage, int totalPages, int pageSize, int totalCount, string pageClickEvent)
         {
@@ -26,11 +24,11 @@ namespace Common.DataTransferObjects._Core.CollectionPaging
             TotalPages = totalPages;
             PageSize = pageSize;
             TotalCount = totalCount;
-            PageClickEvent = pageClickEvent;
 
             HasPrevious = currentPage > 1;
             HasNext = currentPage < totalPages;
         }
+
         public PagingMetadata(int totalCount, int pageNumber, int pageSize)
         {
             TotalCount = totalCount;

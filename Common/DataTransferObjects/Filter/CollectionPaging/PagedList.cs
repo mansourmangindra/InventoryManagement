@@ -1,6 +1,6 @@
-﻿using Common.DataTransferObjects._Core.CollectionPaging.Interfaces;
+﻿using Common.DataTransferObjects.Filter.CollectionPaging.Interfaces;
 
-namespace Common.DataTransferObjects._Core.CollectionPaging
+namespace Common.DataTransferObjects.Filter.CollectionPaging
 {
     public class PagedList<TEntity> : IPagingMetadata
     {

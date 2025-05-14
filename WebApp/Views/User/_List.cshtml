@@ -1,0 +1,71 @@
+﻿@model Common.DataTransferObjects.Filter.CollectionPaging.PagedList<Common.DataTransferObjects.User.UserDetail>
+@*@model WebApp.Models.User.UserSearchViewModel*@
+@using Common.Constants
+@using Common.DataTransferObjects.Filter.CollectionPaging
+@using Common.DataTransferObjects._Core.ReferenceData
+@using Common.DataTransferObjects.UserRole
+@using System.Text
+@inject WebApp.Services.Interfaces.IReferenceDataService _referenceDataService
+
+
+<div class="card-body pb-0">
+    <h5 class="border-bottom pb-3 card-title">User</h5>
+</div>
+<div class="card-body" >
+    <div class="col-12 table-responsive">
+        <table class="table table-hover text-nowrap table-sm">
+            <caption class="d-none">User Management Search Result</caption>
+            <thead class="border-top table-light">
+                <tr>
+                    <th scope="col" class="td-align-left">Full Name</th>
+                    <th scope="col" class="td-align-left">Phone Number</th>
+                    <th scope="col" class="td-align-left">Email Address</th>
+                    <th scope="col" class="td-align-left">Role(s)</th>
+                    <th scope="col" class="td-align-left">Active</th>
+                    <th scope="col" class="td-align-left">Updated By</th>
+                    <th scope="col" class="td-align-left">Updated Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Items == null || !Model.Items.Any())
+                {
+                    <tr>
+                        <td colspan="8" class="text-center">No record found</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td class="td-align-left">
+                                <a asp-action="Detail" asp-controller="UserManagement" asp-route-id="@item.UserId">@item.Name</a>
+                            </td>
+                            <td class="td-align-left">@item.PhoneNumber</td>
+                            <td class="td-align-left">@item.EmailAddress</td>
+                            <td class="td-align-left">
+                                @foreach (UserRoleDetail userRoleDetail in item.UserRoleDetails)
+                                {
+                                    <span><em class="fas fa-user"></em> @userRoleDetail.RoleName </span>
+                                }
+                            </td>
+                            <td class="td-align-left">@_referenceDataService.ConvertBoleanToYesOrNo(item.Active)</td>
+                            <td class="td-align-left">@item.UpdatedBy</td>
+                            <td class="td-align-left">@item.UpdatedDate</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12">
+        @{
+            await Html.RenderPartialAsync("~/Views/_Core/Paging/_SearchResultPaging.cshtml", Model);
+        }
+    </div>
+</div>
+
+@section PageScripts
+{
+    <script src="~/js/User/UserFilterSearchBar.js"></script>
+}

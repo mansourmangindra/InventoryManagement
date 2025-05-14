@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Common.DataTransferObjects.UserRole;
+using Microsoft.AspNetCore.Identity;
 
 namespace Common.DataTransferObjects.User
 {
@@ -14,5 +15,7 @@ namespace Common.DataTransferObjects.User
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Active { get; set; }
+
+        public IEnumerable<UserRoleDetail> UserRoleDetails { get; set; }
     }
 }

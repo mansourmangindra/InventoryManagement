@@ -1,0 +1,43 @@
+﻿@using Common.Constants
+@model Common.DataTransferObjects.CommonSearch.UserSearchFilter
+@using WebApp.Models.SelectList
+
+<div class="card card-outline card-primary" id="searchBar">
+    <div class="card-body pb-0">
+        <h5 class="border-bottom pb-3 card-title">Filter</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8 form-group">
+                <label class="control-label font-weight-normal">Keyword</label>
+                <input class="form-control form-control-sm" id="txtUserFilterKeyword" />
+            </div>
+            <div class="col-sm-2 form-group">
+                <label class="control-label font-weight-normal">Active</label>
+                @await Component.InvokeAsync("ActiveMultiSelectList", new { controlId = "ddlUserFilterActive", optionlabel = "", selectedValues = Model?.Active?.Select(a => a.ToString())})
+            </div>
+            <div class="col-sm-2 form-group">
+                <label class="control-label font-weight-normal">Page Size</label>
+                @await Component.InvokeAsync("PageSizeSelectList", new { controlId = "ddlUserFilterPageSize", selectedValues = Model?.PageSize.ToString()})
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label class="control-label font-weight-normal">Role</label>
+                @await Component.InvokeAsync("MultiSelectList", new MultiSelectListParam() { ControlId = "ddlUserFilterRole", ApiEndpoint = ReferenceDataConstant.ActiveRolesApiRoute, ApiResource = ApiResource.InventoryApiNamedClient/* , SelectedValues = Model?.RoleIds.ToString() */ })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary float-right btn-sm search" id="btnSearch">
+                        <em class="fas fa-search me-1"></em> Search
+                    </button>
+                    <button class="btn btn-default float-right btn-sm mr-2 clear" id="btnClearInput">
+                        <em class="fas fa-eraser me-1"></em> Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

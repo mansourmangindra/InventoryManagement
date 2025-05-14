@@ -1,4 +1,4 @@
-﻿using Common.DataTransferObjects._Core.CollectionPaging;
+﻿using Common.DataTransferObjects.Filter.CollectionPaging;
 using System.Linq.Expressions;
 
 namespace DataAccess.Repositories.Base

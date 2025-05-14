@@ -1,7 +1,7 @@
-﻿using Common.DataTransferObjects._Core.CollectionPaging;
+﻿using Common.DataTransferObjects.Filter.CollectionPaging;
 using System.Text;
 
-namespace Common.DataTransferObjects._Core.BasicFilter
+namespace Common.DataTransferObjects.Filter
 {
     public class DateRangePagination : PagingParameter
     {

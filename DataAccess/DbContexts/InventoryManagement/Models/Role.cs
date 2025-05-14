@@ -24,13 +24,9 @@ public partial class Role
     [StringLength(100)]
     public string UpdatedBy { get; set; }
 
-    [Required]
-    [StringLength(100)]
-    public string CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
-    [Required]
-    [StringLength(100)]
-    public string UpdatedDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
 
     public bool Active { get; set; }
 

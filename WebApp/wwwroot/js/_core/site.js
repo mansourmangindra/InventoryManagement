@@ -289,6 +289,15 @@ let App = function () {
         },
         getCheckboxValue: function (controlSelector) {
             return $(controlSelector).prop("checked");
-        }
+        },
+
+        controlHasLength: function (controlSelector) {
+            if ($(controlSelector).length > 0) {
+                return true;
+            }
+            return false;
+        },
+
+
     }
 }();

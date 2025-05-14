@@ -1,8 +1,8 @@
 ﻿using System.Text;
 
-namespace Common.DataTransferObjects._Core.BasicFilter
+namespace Common.DataTransferObjects.Filter
 {
-    public class KeywordDateRangePagination : DateRangePagination
+    public class KeywordActivePagination : ActivePagination
     {
         public string Keyword { get; set; }
 

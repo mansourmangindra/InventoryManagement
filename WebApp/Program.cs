@@ -64,6 +64,12 @@ builder.Services.AddAuthorization(options =>
         policy.Requirements.Add(new RoleRequirement(new short[] { IMConstant.ADMIN }));
     });
 
+    options.AddPolicy(InventoryPolicyConstant.ErrorLogPolicy, policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.Requirements.Add(new RoleRequirement(new short[] { IMConstant.ADMIN }));
+    });
+
 
 });
 

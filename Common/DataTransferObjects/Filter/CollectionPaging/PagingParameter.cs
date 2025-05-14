@@ -1,14 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Text;
+﻿using System.Text;
 
-namespace Common.DataTransferObjects._Core.CollectionPaging
+namespace Common.DataTransferObjects.Filter.CollectionPaging
 {
     public class PagingParameter
     {
         const int maxPageSize = 100000;
-        private int pageSize = 10;
-
         public int PageNumber { get; set; } = 1;
+
+        private int pageSize = 10;
 
         public int PageSize
         {
@@ -35,12 +34,11 @@ namespace Common.DataTransferObjects._Core.CollectionPaging
         internal static string QueryFilter<TSource>(TSource val, string query)
         {
             StringBuilder sb = new();
-
-            if (!EqualityComparer<TSource>.Default.Equals(val, default(TSource)))
+            if (val != null)
             {
                 if (val is string strVal)
                 {
-                    if (!string.IsNullOrEmpty(strVal) && !string.IsNullOrWhiteSpace(strVal))
+                    if (!String.IsNullOrEmpty(strVal) && !String.IsNullOrWhiteSpace(strVal))
                     {
                         sb.Append($"{query}{strVal.Trim()}");
                     }

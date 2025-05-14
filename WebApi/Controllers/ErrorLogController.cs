@@ -1,7 +1,7 @@
 ﻿using Common.Constants;
-using Common.DataTransferObjects._Core.BasicFilter;
-using Common.DataTransferObjects._Core.CollectionPaging;
 using Common.DataTransferObjects._Core.ErrorLog;
+using Common.DataTransferObjects.Filter;
+using Common.DataTransferObjects.Filter.CollectionPaging;
 using DataAccess.DbContexts.InventoryManagement.Models;
 using DataAccess.UnitOfWorks.InventoryManagement;
 using Microsoft.AspNetCore.Authorization;
@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Search Error Log with Paging")]
-        public async Task<ActionResult<PagedList<ErrorLogDetail>>> Search([FromQuery] KeywordDateRangePagination filter)
+        public async Task<ActionResult<PagedList<ErrorLogDetail>>> Search([FromQuery] KeywordDateRangeActivePagination filter)
         {
             PagedList<ErrorLogDetail> errorLogDetails = await _inventoryUnitOfWork.ErrorLogRepository.GetPagedListAsync(
                 selector: e => new ErrorLogDetail()

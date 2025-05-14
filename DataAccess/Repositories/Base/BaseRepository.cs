@@ -1,4 +1,4 @@
-﻿using Common.DataTransferObjects._Core.CollectionPaging;
+﻿using Common.DataTransferObjects.Filter.CollectionPaging;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
