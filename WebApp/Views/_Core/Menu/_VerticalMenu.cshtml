@@ -49,10 +49,22 @@
             </ul>
         </li>
         <!-- User Management -->
+        <!-- Role -->
+        <li class='menu-item @(currentPage.StartsWith("/Role") ? " active open" : "")'>
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <em class="menu-icon fa-solid fa-user-shield"></em>
+                <div>Role Management</div>
+            </a>
+            <ul class="menu-sub">
+                <li class='menu-item@(currentPage == "/Role" ? " active" : "")'>
+                    <a asp-controller="Role" asp-action="Index" class="menu-link">
+                        <div>Search</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- Module -->
         @if (await _securityService.WithRole(new short[] { IMConstant.ADMIN }, User))
-
-
 
         {
             

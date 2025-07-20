@@ -1,5 +1,9 @@
 ﻿using Common.DataTransferObjects.Filter.CollectionPaging;
+using DataAccess.Extensions;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Data.Common;
 using System.Linq.Expressions;
 
 namespace DataAccess.Repositories.Base
@@ -154,6 +158,32 @@ namespace DataAccess.Repositories.Base
             }
 
             return new PagedList<TResult>(items, new PagingMetadata(count, pagingParameter.PageNumber, pagingParameter.PageSize));
+        }
+
+        public async Task<PagedList<T>> GetSPPagedListAsync<T>(string storedProcedure, SqlParameter[] parameters, PagingParameter pagingParameter, Func<DbDataReader, T> map)
+        {
+            var context = _entity.GetService<ICurrentDbContext>().Context;
+            return await context.ExecutePagedStoredProcedureAsync(
+                storedProcedure,
+                parameters,
+                map,
+                pagingParameter.PageNumber,
+                pagingParameter.PageSize
+            );
+        }
+
+        //AddSP
+        public async Task<T> AddAsyncSP<T>(string storedProcedure, SqlParameter[] parameters, Func<DbDataReader, T> map)
+        {
+            var context = _entity.GetService<ICurrentDbContext>().Context;
+            return await context.ExecuteSingleResultStoredProcedureAsync(storedProcedure, parameters, map);
+        }
+
+        //EditSP
+        public async Task<T> EditAsyncSP<T>(string storedProcedure, SqlParameter[] parameters, Func<DbDataReader, T> map)
+        {
+            var context = _entity.GetService<ICurrentDbContext>().Context;
+            return await context.ExecuteSingleResultStoredProcedureAsync(storedProcedure, parameters, map);
         }
     }
 }

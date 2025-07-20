@@ -1,0 +1,22 @@
+﻿@model Common.DataTransferObjects.CommonSearch.BasicSearchFilter
+@{
+    ViewData["title"] = "Roles";
+}
+
+<div id="card-error-search" class="card">
+    <div class="card-body pb-0">
+        <h5 class="border-bottom pb-3 card-title">Error Log</h5>
+    </div>
+    <div class="card-body">
+@*         @{
+            await Html.RenderPartialAsync("~/Views/_Core/BasicFilter/_KeywordDateRangePagination.cshtml", Model);
+        } *@
+        KeyDate?
+    </div>
+    <div id="divSearchResult" class="card-body">
+    </div>
+</div>
+
+@section PageScripts {
+    <script src="~/js/user/search.js" asp-append-version="true"></script>
+}
