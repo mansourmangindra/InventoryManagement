@@ -62,9 +62,9 @@ namespace WebApi.Controllers
                 selector: u => new UserRoleDetail()
                 {
                     UserId = u.UserId,
-                    UserRoleId = u.UserRoleId,
+                    UserRoleId = (short)u.UserRoleId,
                     RoleId = u.Role.RoleId,
-                    UpdatedBy = u.UpdatedBy,
+                    UpdatedBY = u.UpdatedBy,
                     UpdatedDate = u.UpdatedDate
                 },
                 predicate: u => u.UserRoleId == id);

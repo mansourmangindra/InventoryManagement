@@ -1,6 +1,4 @@
-﻿using Common.DataTransferObjects.RoleModule;
-using Common.DataTransferObjects.User;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DataTransferObjects.Role
 {
-    public class RoleDetail
+    public class RoleDto
     {
         public int RoleId { get; set; }
         public string Name { get; set; }
@@ -17,10 +15,5 @@ namespace Common.DataTransferObjects.Role
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Active { get; set; }
-
-        public IEnumerable<RoleModuleDetail> RoleModuleDetails { get; set; }
-        public IEnumerable<UserDetail> ListOfUsers { get; set; }
-
-        public int TotalCount { get; set; }
     }
 }

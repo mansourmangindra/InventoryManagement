@@ -1,4 +1,6 @@
 ﻿using Common.DataTransferObjects.Filter.CollectionPaging;
+using Microsoft.Data.SqlClient;
+using System.Data.Common;
 using System.Linq.Expressions;
 
 namespace DataAccess.Repositories.Base
@@ -38,5 +40,14 @@ namespace DataAccess.Repositories.Base
         //AGREGATTED
         Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate);
         Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate);
+
+        //SPPagedList
+        Task<PagedList<T>> GetSPPagedListAsync<T>(string storedProcedure, SqlParameter[] parameters, PagingParameter pagingParameterm, Func<DbDataReader, T> map);
+
+        //SPAdd
+        Task<T> AddAsyncSP<T>(string storedProcedure, SqlParameter[] parameters, Func<DbDataReader, T> map);
+
+        //SPEDI
+        Task<T> EditAsyncSP<T>(string storedProcedure, SqlParameter[] parameters, Func<DbDataReader, T> map);
     }
 }

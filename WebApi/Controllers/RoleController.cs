@@ -6,6 +6,8 @@ using Common.DataTransferObjects.PositionType;
 using Common.DataTransferObjects.Role;
 using Common.DataTransferObjects.RoleModule;
 using Common.DataTransferObjects.User;
+using Common.DataTransferObjects.UserRole;
+using DataAccess.DbContexts.InventoryManagement.Models;
 using DataAccess.UnitOfWorks.InventoryManagement;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -85,5 +87,106 @@ namespace WebApi.Controllers
 
             return Ok(roleDetail);
         }
+
+        [HttpGet]
+        [Route("GetAllRoles")]
+        [SwaggerOperation(Summary = "Get All Roles via Stored Procedure")]
+        public async Task<ActionResult<IEnumerable<RoleDetail>>> GetAllUserDetailsFromSP()
+        {
+            IEnumerable<Role> accountDetails = await _inventoryUnitOfWork.RoleRepository.GetRoleAllFromSP();
+
+            if (accountDetails == null || !accountDetails.Any())
+            {
+                return NotFound(new ErrorMessage(ErrorMessageTypeConstant.NotFound));
+            }
+
+            return Ok(accountDetails);
+        }
+
+        [HttpGet]
+        [Route("GetAllRolesPagedList")]
+        [SwaggerOperation(Summary = "Get All Roles PagedList via Stored Procedure")]
+        public async Task<ActionResult<PagedList<Role>>> GetAllRoleDetailsPagedFromSP([FromQuery] BasicSearchFilter filter)
+        {
+            PagedList<Role> accountDetails = await _inventoryUnitOfWork.RoleRepository.GetRoleAllFromSPPagedListAsync(filter);
+
+            return Ok(accountDetails);
+        }
+
+
+        [HttpGet]
+        [Route("GetAllRolesJoin")]
+        [SwaggerOperation(Summary = "Get All Roles Join via Stored Procedure")]
+        public async Task<ActionResult<IEnumerable<UserRoleDetail>>> GetAllUserDetailsFromSPJoin()
+        {
+            IEnumerable<UserRoleDetail> accountDetails = await _inventoryUnitOfWork.RoleRepository.GetRoleAllFromSPJoin();
+
+            if (accountDetails == null || !accountDetails.Any())
+            {
+                return NotFound(new ErrorMessage(ErrorMessageTypeConstant.NotFound));
+            }
+
+            return Ok(accountDetails);
+        }
+
+        [HttpGet]
+        [Route("GetAllRolesJoinPagedList")]
+        [SwaggerOperation(Summary = "Get All Roles Join PagedList via Stored Procedure")]
+        public async Task<ActionResult<PagedList<UserRoleDetail>>> GetAllRoleDetailsJoinPagedFromSP([FromQuery] BasicSearchFilter filter)
+        {
+            PagedList<UserRoleDetail> accountDetails = await _inventoryUnitOfWork.RoleRepository.GetRoleAllFromSPJoinPagedList(filter);
+
+            return Ok(accountDetails);
+
+        }
+
+        [HttpPost]
+        [Route("TransactionBy/{transactionBy}")]
+        [SwaggerOperation(Summary = "Create Role")]
+        public async Task<ActionResult<int>> Create([FromRoute] string transactionBy, [FromBody] RoleDto roleDetail)
+        {
+
+            await _inventoryUnitOfWork.RoleRepository.CreateRoleAsync(
+                roleDetail.RoleId,
+                roleDetail.Name,
+                transactionBy,
+                transactionBy,
+                roleDetail.Active
+            );
+
+            await _inventoryUnitOfWork.SaveChangesAsync(transactionBy);
+
+            return Ok(roleDetail.RoleId);
+        }
+
+
+        [HttpPost("{roleId}/TransactionBy/{transactionBy}")]
+        [SwaggerOperation(Summary = "Update Role by ID")]
+        public async Task<ActionResult> Update([FromRoute] int roleId, [FromRoute] string transactionBy, [FromBody] UpdateRoleDto roleDetail)
+        {
+            await _inventoryUnitOfWork.RoleRepository.UpdateRoleAsync(
+               roleId,
+               roleDetail.Name,
+               transactionBy,
+               false
+           );
+
+            Role newRole = await _inventoryUnitOfWork.RoleRepository.CreateRoleAsync(
+                roleDetail.RoleId,
+                roleDetail.Name,
+                transactionBy,
+                transactionBy,
+                true
+             );
+
+
+
+            await _inventoryUnitOfWork.SaveChangesAsync(transactionBy);
+
+            return Ok();
+        }
+
+
+
     }
 }

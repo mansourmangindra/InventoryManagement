@@ -21,7 +21,7 @@ let Search = function () {
             let pageSize = $("#ddlPageSize").val();
             let searchKeyword = $("#txtKeyword").val();
 
-            let url = `/User/_searchresult?PageNumber=${searchPageIndex}`;
+            let url = `/Role/ListRole?PageNumber=${searchPageIndex}`;
 
             url += `&PageSize=${pageSize}`;
             url += `&Keyword=${searchKeyword}`;
