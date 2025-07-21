@@ -3,6 +3,7 @@ using Common.Constants;
 using Common.DataTransferObjects._Core.ErrorLog;
 using Common.DataTransferObjects.CommonSearch;
 using Common.DataTransferObjects.Filter.CollectionPaging;
+using Common.DataTransferObjects.Role;
 using Common.DataTransferObjects.User;
 using Common.DataTransferObjects.UserRole;
 using DataAccess.DbContexts.InventoryManagement.Models;
@@ -186,6 +187,38 @@ namespace WebApi.Controllers
 
             return Ok(userDetails);
         }
+
+
+        [HttpPost]
+        [Route("user/{user}")]
+        [SwaggerOperation(Summary = "Create or Update User")]
+        public async Task<ActionResult<int>> CreateOrUpdateUser([FromRoute] string user, [FromBody] UserDto userDetail)
+        {
+            int action;
+            if (userDetail.UserId == 0)
+                action = 1;
+            else if (!userDetail.Active)
+                action = 3;
+            else
+                action = 2;
+
+            var result = await _inventoryUnitOfWork.UserRepository.CreateOrUpdateUserAsync(
+                action,
+                userDetail.UserId,
+                userDetail.Name,
+                userDetail.PhoneNumber,
+                userDetail.EmailAddress,
+                userDetail.Password,
+                user,
+                user,
+                userDetail.Active
+            );
+
+            await _inventoryUnitOfWork.SaveChangesAsync(user);
+
+            return Ok(result.UserId);
+        }
+
 
 
 
