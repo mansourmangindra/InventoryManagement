@@ -63,6 +63,20 @@
                 </li>
             </ul>
         </li>
+
+        <li class='menu-item @(currentPage.StartsWith("/UserAccount") ? " active open" : "")'>
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <em class="menu-icon fa-solid fa-user-shield"></em>
+                <div>ADMIN</div>
+            </a>
+            <ul class="menu-sub">
+                <li class='menu-item@(currentPage == "/UserAccount" ? " active" : "")'>
+                    <a asp-controller="Maintenance" asp-action="Index" class="menu-link">
+                        <div>ADMIN</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <!-- Module -->
         @if (await _securityService.WithRole(new short[] { IMConstant.ADMIN }, User))
 

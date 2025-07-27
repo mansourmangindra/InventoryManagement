@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Maintenance";
+}
+<link rel="stylesheet" href="~/css/global/Style.css" asp-append-version="true" />
+
+<div class="main-container d-flex">
+    <div class="sidebars">
+        <div class="sidebars-header">
+            <span class="admin-text">Admin</span>
+            <button class="btn p-0">
+                <!-- Hamburger icon for menu toggle -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6.75H11.0731M4 12H18.75M4 17.25H11.0731" stroke="#3783D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16 15L19 12L16 9" stroke="#3783D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+            </button>
+        </div>
+
+        <ul class="nav flex-column sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <!-- Ticket Assignment Icon SVG -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 18L13 15L10 12" stroke="#697A96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14 2V6C14 6.53043 14.2107 7.03914 14.5858 7.41421C14.9609 7.78929 15.4696 8 16 8H20" stroke="#697A96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M4 11V4C4 3.46957 4.21071 2.96086 4.58579 2.58579C4.96086 2.21071 5.46957 2 6 2H15L20 7V20C20 20.5304 19.7893 21.0391 19.4142 21.4142C19.0391 21.7893 18.5304 22 18 22H6C5.46957 22 4.96086 21.7893 4.58579 21.4142C4.21071 21.0391 4 20.5304 4 20V17C4 16.4696 4.21071 15.9609 4.58579 15.5858C4.96086 15.2107 5.46957 15 6 15H13" stroke="#697A96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    Ticket Assignment 
+                    <span class="arrow down ms-2"></span>
+                </a>
+            </li>
+
+            <li class="nav-item has-submenu">
+                <a class="nav-link" href="#maintenanceCollapse" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="maintenanceCollapse">
+                    <!-- Maintenance Icon SVG -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.7003 6.30022C14.5171 6.48715 14.4145 6.73847 14.4145 7.00022C14.4145 7.26198 14.5171 7.5133 14.7003 7.70022L16.3003 9.30022C16.4873 9.48345 16.7386 9.58608 17.0003 9.58608C17.2621 9.58608 17.5134 9.48345 17.7003 9.30022L21.4703 5.53022C21.9732 6.64141 22.1254 7.87946 21.9068 9.07937C21.6882 10.2793 21.1091 11.3841 20.2466 12.2465C19.3842 13.1089 18.2794 13.6881 17.0795 13.9067C15.8796 14.1253 14.6415 13.9731 13.5303 13.4702L6.62034 20.3802C6.22252 20.778 5.68295 21.0015 5.12034 21.0015C4.55773 21.0015 4.01817 20.778 3.62034 20.3802C3.22252 19.9824 2.99902 19.4428 2.99902 18.8802C2.99902 18.3176 3.22252 17.778 3.62034 17.3802L10.5303 10.4702C10.0275 9.35904 9.87526 8.12099 10.0939 6.92108C10.3125 5.72117 10.8916 4.61638 11.7541 3.75395C12.6165 2.89151 13.7213 2.31239 14.9212 2.09377C16.1211 1.87514 17.3592 2.02739 18.4703 2.53022L14.7103 6.29022L14.7003 6.30022Z" stroke="#697A96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Maintenance 
+                    <span class="arrow up ms-2"></span>
+                </a>
+                <div class="collapse submenu" id="maintenanceCollapse">
+                    <ul class="nav flex-column align-content-center">
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("HRCertificate","Maintenance")" data-content-id="sub-content">HR Certificate</a>
+                        </li>
+                        <li class="nav-item submenu-item active">
+                            <a class="nav-link" href="@Url.Action("CardInventory","Maintenance")" data-content-id="sub-content">Card Inventory</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("AccountVariant","Maintenance")" data-content-id="sub-content">Account Variant</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("TermsandConditions","Maintenance")" data-content-id="sub-content">Terms And Conditions</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("CompanyClassification","Maintenance")" data-content-id="sub-content">Company Classification</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("PayrollAccountOpeningMode","Maintenance")" data-content-id="sub-content">Payroll Account Opening</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("CDDStatus","Maintenance")" data-content-id="sub-content">CDD Status</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("Branch","Maintenance")" data-content-id="sub-content">Branch</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("Index","UserAccount")" data-content-id="sub-content">User Account</a>
+                        </li>
+                        <li class="nav-item submenu-item">
+                            <a class="nav-link" href="@Url.Action("UserRole","Maintenance")" data-content-id="sub-content">User Role</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <!-- Add more nav items as needed -->
+        </ul>
+    </div>
+    <div class="main-content">
+        <header class="app-header">
+            <div class="header-item logo"></div>
+            <div class="header-item">
+                <i class="bi bi-bell"></i> <!-- Notification icon -->
+            </div>
+            <div class="header-item profile-pic">
+                <!-- Placeholder for user profile picture -->
+                <img src="https://placehold.co/36x36/cccccc/333333?text=NJH" alt="User Profile">
+            </div>
+        </header>
+        <!-- Content Sections -->
+        <div id="sub-content" class="content-section active">
+            <!-- Content-->
+        </div>
+       
+    </div>
+</div>
+
+@section PageScripts
+{
+
+}
+   @*  <script src="~/js/global/JavaScript.js"></script> *@
+

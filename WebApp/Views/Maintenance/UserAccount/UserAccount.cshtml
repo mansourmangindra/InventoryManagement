@@ -1,0 +1,24 @@
+﻿@model Common.DataTransferObjects.Filter.KeywordDateRangeActivePagination
+@using WebApp.Models.SelectList
+@{
+    ViewData["title"] = "UserAccount";
+}
+
+
+<div id="card-error-search" class="card" data-requires-script="/js/UserAccount/search.js" data-init="Search.initialize">
+    <div class="card-body pb-0">
+        <h5 class="border-bottom pb-3 card-title">User Account</h5>
+    </div>
+    <div class="card-body">
+                @{
+            await Html.RenderPartialAsync("~/Views/_Core/BasicFilter/_KeywordDateRangePagination.cshtml", Model);
+        }
+    </div>
+    <div id="divSearchResult" class="card-body">
+    </div>
+</div>
+
+
+@* @section Scripts {
+    <script src="~/js/UserAccount/search.js" asp-append-version="true"></script>
+} *@
