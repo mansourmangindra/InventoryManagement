@@ -1,6 +1,7 @@
 ﻿using Common.Constants;
 using Common.DataTransferObjects._Core.ErrorLog;
 using Common.DataTransferObjects.CommonSearch;
+using Common.DataTransferObjects.Filter;
 using Common.DataTransferObjects.Filter.CollectionPaging;
 using Common.DataTransferObjects.PositionType;
 using Common.DataTransferObjects.Role;
@@ -132,7 +133,7 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("GetAllRolesJoinPagedList")]
         [SwaggerOperation(Summary = "Get All Roles Join PagedList via Stored Procedure")]
-        public async Task<ActionResult<PagedList<UserRoleDetail>>> GetAllRoleDetailsJoinPagedFromSP([FromQuery] BasicSearchFilter filter)
+        public async Task<ActionResult<PagedList<UserRoleDetail>>> GetAllRoleDetailsJoinPagedFromSP([FromQuery] KeywordDateRangeActivePagination filter)
         {
             PagedList<UserRoleDetail> accountDetails = await _inventoryUnitOfWork.RoleRepository.GetRoleAllFromSPJoinPagedList(filter);
 

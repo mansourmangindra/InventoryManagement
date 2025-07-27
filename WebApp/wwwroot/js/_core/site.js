@@ -1,13 +1,27 @@
 ﻿$(document).ready(function () {
     App.initializeSelect2();
     App.initializeCollapsibleCard();
+    //App.initializeContent();
 
     if (window.localStorage.getItem("toastrMsg") !== null) {
         let toastrMsg = JSON.parse(window.localStorage.getItem("toastrMsg"));
         App.alert(toastrMsg.type, toastrMsg.message);
         window.localStorage.clear();
     }
+
+    
+
 });
+
+function getFunctionByName(functionName) {
+    let namespaces = functionName.split(".");
+    let func = window;
+    for (let i = 0; i < namespaces.length; i++) {
+        func = func[namespaces[i]];
+        if (!func) return null;
+    }
+    return func;
+}
 
 const AppConstant = {
     dateFormat: "MM/DD/YYYY",
@@ -41,6 +55,7 @@ let App = function () {
                 "hideMethod": "fadeOut"
             }
         },
+
         initializeSelect2: function () {
             let select2 = $('.select2').not('.select2-container--default');
             if (select2.length) {
@@ -301,3 +316,50 @@ let App = function () {
 
     }
 }();
+
+$(document).on('click', '[data-content-id="sub-content"]', function (e) {
+    e.preventDefault();
+
+    const url = $(this).attr("href");
+
+    $.get(url, function (html) {
+        $('#sub-content').html(html);
+
+        App.initializeSelect2?.();
+        App.initializeCollapsibleCard?.();
+
+        const scriptEl = $('#sub-content').find('[data-requires-script]');
+        const scriptPath = scriptEl.data('requires-script');
+        const initFuncPath = scriptEl.data('init'); 
+
+        if (scriptPath) {
+            loadScriptOnce(scriptPath, () => {
+                if (initFuncPath) {
+                    const parts = initFuncPath.split('.');
+                    let context = window;
+                    for (const part of parts) {
+                        context = context?.[part];
+                        if (!context) break;
+                    }
+                    if (typeof context === 'function') {
+                        context();
+                    }
+                }
+            });
+        }
+    });
+});
+
+function loadScriptOnce(src, callback) {
+    if (!$(`script[src="${src}"]`).length) {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = callback;
+        document.body.appendChild(script);
+    } else {
+        if (typeof callback === 'function') callback();
+    }
+}
+
+
+

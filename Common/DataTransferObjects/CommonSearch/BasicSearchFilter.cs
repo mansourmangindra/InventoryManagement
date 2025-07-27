@@ -11,33 +11,40 @@ namespace Common.DataTransferObjects.CommonSearch
 
         public string SearchKeyword { get; set; }
 
-        public IEnumerable<bool> Active { get; set; }
+        public IEnumerable<bool> Active { get; set; } = Enumerable.Empty<bool>();
+
+        public string SortOrder { get; set; } = "asc"; // default to 'asc'
+        public int SortBy { get; set; } = 0;           // default to first column
 
         public override string GetQueryString()
         {
-            StringBuilder sb = new();
-            
+            var sb = new StringBuilder();
+
             sb.Append($"PageNumber={PageNumber}");
             sb.Append($"&PageSize={PageSize}");
-            sb.Append(QueryFilter(StartDate, $"&StartDate="));
-            sb.Append(QueryFilter(EndDate, $"&EndDate="));
-            if (!String.IsNullOrEmpty(Keyword))
-            {
-                sb.Append($"&Keyword={Keyword}");
-            }
 
-            if (!String.IsNullOrEmpty(SearchKeyword))
-            {
-                sb.Append($"&SearchKeyword={SearchKeyword}");
-            }
+            if (StartDate.HasValue)
+                sb.Append($"&StartDate={StartDate.Value:yyyy-MM-dd}");
+
+            if (EndDate.HasValue)
+                sb.Append($"&EndDate={EndDate.Value:yyyy-MM-dd}");
+
+            if (!string.IsNullOrEmpty(Keyword))
+                sb.Append($"&Keyword={Uri.EscapeDataString(Keyword)}");
+
+            if (!string.IsNullOrEmpty(SearchKeyword))
+                sb.Append($"&SearchKeyword={Uri.EscapeDataString(SearchKeyword)}");
 
             if (Active != null && Active.Any())
             {
-                foreach (var active in Active)
-                {
-                    sb.Append($"&Active={active}");
-                }
+                foreach (var val in Active)
+                    sb.Append($"&Active={val.ToString().ToLower()}");
             }
+
+            if (!string.IsNullOrEmpty(SortOrder))
+                sb.Append($"&SortOrder={SortOrder}");
+
+            sb.Append($"&SortBy={SortBy}");
 
             return sb.ToString();
         }

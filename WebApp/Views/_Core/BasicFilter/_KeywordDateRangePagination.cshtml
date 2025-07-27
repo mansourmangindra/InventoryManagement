@@ -1,5 +1,6 @@
 ﻿@model Common.DataTransferObjects.Filter.KeywordDateRangeActivePagination
 @using Common.Constants
+@using WebApp.Models.SelectList
 
 <div class="row">
     <div class="col-md-7 mb-3">
@@ -16,6 +17,11 @@
         }
         <label for="txtDateRange" class="form-label">Date Range</label>
         <input id="txtDateRange" class="form-control form-control" type="text" placeholder="01/01/2020 - 12/31/2024" />
+    </div>
+    @* Added ActiveListParam *@
+    <div class="col-sm-2 form-group">
+        <label for="ddlUserFilterActive" class="form-label">Active</label>
+        @await Component.InvokeAsync("ActiveMultiSelectList", new { controlId = "ddlUserRoleFilterActive", optionlabel = "", selectedValues = Model?.Active?.Select(a => a.ToString()) })
     </div>
     <div class="col-md-2 mb-3">
         <label for="ddlPageSize" class="form-label">Page Size</label>
